@@ -1,0 +1,32 @@
+ext {
+    logbackjVersion = '1.5.16'
+    serenityCoreVersion = '4.2.7'
+    junitPlatform = '1.11.4'
+    junitVersion = '5.11.4'
+    assertJVersion = '3.27.3'
+    cucumberVersion = '7.22.0'
+
+    libs = [
+            logback: "ch.qos.logback:logback-classic:${logbackjVersion}",
+
+            test    : [
+                    serenity   : [
+                            core               : "net.serenity-bdd:serenity-core:${serenityCoreVersion}",
+                            junit              : "net.serenity-bdd:serenity-junit5:${serenityCoreVersion}",
+                            screenplay         : "net.serenity-bdd:serenity-screenplay:${serenityCoreVersion}",
+                            screenplayWebdriver: "net.serenity-bdd:serenity-screenplay-webdriver:${serenityCoreVersion}",
+                            cucumber           : "net.serenity-bdd:serenity-cucumber:${serenityCoreVersion}",
+                    ],
+                    cucumber   : [
+                            java : "io.cucumber:cucumber-java:${cucumberVersion}",
+                            junit: "io.cucumber:cucumber-junit-platform-engine:${cucumberVersion}",
+                            core : "io.cucumber:cucumber-core:${cucumberVersion}"
+                    ],
+                    junitPlatform  : "org.junit.platform:junit-platform-suite:${junitPlatform}",
+                    junitLauncher  : "org.junit.platform:junit-platform-launcher:${junitPlatform}",
+                    junitVintage   : "org.junit.vintage:junit-vintage-engine:${junitVersion}",
+                    junitJupiter  : "org.junit.jupiter:junit-jupiter-engine:${junitVersion}",
+                    assertj    : "org.assertj:assertj-core:${assertJVersion}"
+            ]
+    ]
+}

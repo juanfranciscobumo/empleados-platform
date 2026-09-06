@@ -1,0 +1,29 @@
+ext {
+    slf4jVersion = '2.0.5'
+    serenityCoreVersion = '3.5.0'
+    junitVersion = '5.9.0'
+    assertJVersion = '3.23.1'
+    cucumberVersion = '7.8.1'
+
+    libs = [
+            slf4jApi: "org.slf4j:slf4j-simple:${slf4jVersion}",
+
+            test    : [
+                    serenity   : [
+                            core               : "net.serenity-bdd:serenity-core:${serenityCoreVersion}",
+                            junit              : "net.serenity-bdd:serenity-junit:${serenityCoreVersion}",
+                            screenplay         : "net.serenity-bdd:serenity-screenplay:${serenityCoreVersion}",
+                            screenplayWebdriver: "net.serenity-bdd:serenity-screenplay-webdriver:${serenityCoreVersion}",
+                            cucumber           : "net.serenity-bdd:serenity-cucumber:${serenityCoreVersion}",
+                    ],
+                    cucumber   : [
+                            java : "io.cucumber:cucumber-java:${cucumberVersion}",
+                            junit: "io.cucumber:cucumber-junit-platform-engine:${cucumberVersion}",
+                            core : "io.cucumber:cucumber-core:${cucumberVersion}"
+                    ],
+                    junitApi   : "org.junit.jupiter:junit-jupiter-api:${junitVersion}",
+                    junitEngine: "org.junit.jupiter:junit-jupiter-engine:${junitVersion}",
+                    assertj    : "org.assertj:assertj-core:${assertJVersion}"
+            ]
+    ]
+}

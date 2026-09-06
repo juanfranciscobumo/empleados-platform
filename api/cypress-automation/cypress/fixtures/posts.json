@@ -1,0 +1,19 @@
+{
+  "newPost": {
+    "title": "Test Post",
+    "body": "This is a test post body",
+    "userId": 1
+  },
+  "posts": [
+    {
+      "title": "First Post",
+      "body": "Body of first post",
+      "userId": 1
+    },
+    {
+      "title": "Second Post",
+      "body": "Body of second post",
+      "userId": 2
+    }
+  ]
+}

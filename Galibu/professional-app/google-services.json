@@ -1,0 +1,121 @@
+{
+  "project_info": {
+    "project_number": "692995531925",
+    "project_id": "galibu-app",
+    "storage_bucket": "galibu-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:692995531925:android:9f4aede7bf0bd6c65de79c",
+        "android_client_info": {
+          "package_name": "com.aistudio.galibu.vqxdrp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "692995531925-i5vbjamhcpl89gio5r0fva6hukvh5045.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.aistudio.galibu.vqxdrp",
+            "certificate_hash": "693e292bc1c873010131e2c84dbfd29fc700bc4d"
+          }
+        },
+        {
+          "client_id": "692995531925-vih27djj3vof10iujkgv18c4qbdqrmag.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD8IGJqFw1TUqo3d4MCupAmjpMCweBcTQw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "692995531925-vih27djj3vof10iujkgv18c4qbdqrmag.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:692995531925:android:85f117cd751017fe5de79c",
+        "android_client_info": {
+          "package_name": "com.galibu.client"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "692995531925-0juhg2ibubvpthvgfh0kb31k4sbin0jl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.galibu.client",
+            "certificate_hash": "693e292bc1c873010131e2c84dbfd29fc700bc4d"
+          }
+        },
+        {
+          "client_id": "692995531925-vih27djj3vof10iujkgv18c4qbdqrmag.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD8IGJqFw1TUqo3d4MCupAmjpMCweBcTQw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "692995531925-vih27djj3vof10iujkgv18c4qbdqrmag.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:692995531925:android:0fbc48afcfecd6ff5de79c",
+        "android_client_info": {
+          "package_name": "com.galibu.professional"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "692995531925-ppvlhjbd5kjd4vkkhl07971t0m7n4rh9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.galibu.professional",
+            "certificate_hash": "693e292bc1c873010131e2c84dbfd29fc700bc4d"
+          }
+        },
+        {
+          "client_id": "692995531925-vih27djj3vof10iujkgv18c4qbdqrmag.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD8IGJqFw1TUqo3d4MCupAmjpMCweBcTQw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "692995531925-vih27djj3vof10iujkgv18c4qbdqrmag.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

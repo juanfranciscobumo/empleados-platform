@@ -1,0 +1,40 @@
+{
+  "name": "playwright-web-automation",
+  "version": "1.0.0",
+  "description": "Automatización web con Playwright y TypeScript",
+  "scripts": {
+    "test": "npx playwright test",
+    "test:headed": "npx playwright test --headed",
+    "test:ui": "npx playwright test --ui",
+    "test:debug": "npx playwright test --debug",
+    "test:login": "npx playwright test tests/tests/login.spec.ts",
+    "test:inventory": "npx playwright test tests/tests/inventory.spec.ts",
+    "test:cart": "npx playwright test tests/tests/cart.spec.ts",
+    "test:checkout": "npx playwright test tests/tests/checkout.spec.ts",
+    "test:dev": "BASE_URL=https://www.saucedemo.com npx playwright test",
+    "test:staging": "BASE_URL=https://www.saucedemo.com npx playwright test",
+    "test:prod": "BASE_URL=https://www.saucedemo.com npx playwright test",
+    "report": "npx playwright show-report",
+    "test:accessibility": "npx playwright test tests/tests/accessibility.spec.ts",
+    "allure:generate": "allure generate allure-results --clean",
+    "allure:open": "allure open allure-report",
+    "allure:serve": "allure serve allure-results",
+    "lint": "eslint tests/ --ext .ts",
+    "lint:fix": "eslint tests/ --ext .ts --fix",
+    "format": "prettier --write 'tests/**/*.ts'",
+    "format:check": "prettier --check 'tests/**/*.ts'"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.13.0",
+    "@playwright/test": "^1.40.0",
+    "@types/node": "^20.0.0",
+    "@typescript-eslint/eslint-plugin": "^8.67.0",
+    "@typescript-eslint/parser": "^8.67.0",
+    "allure-playwright": "^3.10.2",
+    "axe-core": "^4.13.0",
+    "eslint": "^10.8.1",
+    "eslint-config-prettier": "^10.1.8",
+    "prettier": "^3.9.6",
+    "typescript": "^5.3.0"
+  }
+}

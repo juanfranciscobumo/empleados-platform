@@ -1,0 +1,94 @@
+{
+  "uuid": "795eebfc-594d-49f3-93d0-0daf6cf776cd",
+  "lastMigration": 33,
+  "name": "Prueba",
+  "endpointPrefix": "",
+  "latency": 0,
+  "port": 3001,
+  "hostname": "",
+  "folders": [],
+  "routes": [
+    {
+      "uuid": "8cdbe26f-8884-425f-935a-3f1751af964b",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "employees/:id",
+      "responses": [
+        {
+          "uuid": "9f32ab74-763e-49bc-8ced-024d38a2c8a9",
+          "body": "{\r\n    {{#switch (urlParam 'id')}}\r\n      {{#case '1'}}\r\n      \"id\": {{urlParam 'id'}},\r\n      \"name\": \"Bilbo Baggins\",\r\n      \"role\": \"burglar\"\r\n      {{/case}}\r\n      {{#case '2'}}\r\n      \"id\": {{urlParam 'id'}},\r\n\t    \"name\": \"Frodo Baggins\",\r\n\t    \"role\": \"thief\"\r\n      {{/case}}\r\n    {{/switch}}\r\n  }",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    }
+  ],
+  "rootChildren": [
+    {
+      "type": "route",
+      "uuid": "8cdbe26f-8884-425f-935a-3f1751af964b"
+    }
+  ],
+  "proxyMode": false,
+  "proxyHost": "",
+  "proxyRemovePrefix": false,
+  "tlsOptions": {
+    "enabled": false,
+    "type": "CERT",
+    "pfxPath": "",
+    "certPath": "",
+    "keyPath": "",
+    "caPath": "",
+    "passphrase": ""
+  },
+  "cors": true,
+  "headers": [
+    {
+      "key": "Content-Type",
+      "value": "application/json"
+    },
+    {
+      "key": "Access-Control-Allow-Origin",
+      "value": "*"
+    },
+    {
+      "key": "Access-Control-Allow-Methods",
+      "value": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
+    },
+    {
+      "key": "Access-Control-Allow-Headers",
+      "value": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
+    }
+  ],
+  "proxyReqHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "proxyResHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "data": [],
+  "callbacks": []
+}

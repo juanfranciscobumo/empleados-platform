@@ -1,0 +1,5 @@
+{
+  "baseUrl": "https://jsonplaceholder.typicode.com",
+  "env": "staging",
+  "timeout": 30000
+}

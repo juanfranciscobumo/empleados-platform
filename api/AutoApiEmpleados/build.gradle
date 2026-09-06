@@ -1,0 +1,49 @@
+defaultTasks 'clean', 'test', 'aggregate'
+
+repositories {
+    mavenCentral()
+}
+
+buildscript {
+    repositories {
+        mavenCentral()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath("net.serenity-bdd:serenity-gradle-plugin:4.2.7")
+    }
+}
+apply plugin: 'java-library'  // Solo este plugin si es una biblioteca Java
+apply plugin: "net.serenity-bdd.serenity-gradle-plugin"  // Plugin para Serenity BDD
+apply from: "$rootDir/gradle/libraries.gradle"
+dependencies {
+    implementation libs.test.serenity.core
+    implementation libs.test.cucumber.junit
+    implementation libs.test.cucumber.java
+    implementation libs.test.cucumber.core
+    implementation libs.test.serenity.screenplay
+    implementation libs.test.serenity.junit
+    implementation libs.test.serenity.cucumber
+    implementation libs.test.junitPlatform
+    implementation libs.test.junitLauncher
+    implementation libs.test.junitVintage
+    implementation libs.test.junitJupiter
+    implementation libs.test.serenity.rest
+    implementation libs.test.assertj
+    implementation libs.logback
+    implementation libs.test.jacksonDatatype
+    implementation libs.test.jacksonDataformat
+}
+
+test {
+    testLogging.showStandardStreams = true
+    systemProperties System.getProperties()
+    useJUnitPlatform()
+}
+
+gradle.startParameter.continueOnFailure = false  // Se recomienda false para obtener un reporte claro de fallos
+
+test.finalizedBy(aggregate)  // Asegúrate de que la tarea "aggregate" esté definida en el build.gradle
+

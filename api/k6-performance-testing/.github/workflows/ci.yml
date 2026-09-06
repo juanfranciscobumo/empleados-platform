@@ -1,0 +1,74 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install k6
+        run: |
+          sudo gpg -k
+          sudo gpg --no-default-keyring --keyring /usr/share/keyrings/k6-archive-keyring.gpg --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys C5AD17C747E3415A3642D57D77C6C491D6AC1D69
+          echo "deb [signed-by=/usr/share/keyrings/k6-archive-keyring.gpg] https://dl.k6.io/deb stable main" | sudo tee /etc/apt/sources.list.d/k6.list
+          sudo apt-get update
+          sudo apt-get install k6
+      - name: Create reports directory
+        run: mkdir -p reports
+      - name: Run Posts load test
+        run: k6 run tests/posts.js
+      - name: Run Users load test
+        run: k6 run tests/users.js
+      - name: Run Full scenario load test
+        run: k6 run tests/full-scenario.js
+      - name: Generate HTML report
+        if: always()
+        run: |
+          cat > reports/index.html << 'HTMLEOF'
+          <!DOCTYPE html>
+          <html lang="en">
+          <head><meta charset="UTF-8"><title>k6 Performance Test Results</title>
+          <style>body{font-family:Inter,sans-serif;max-width:900px;margin:0 auto;padding:2rem;background:#0f172a;color:#e2e8f0}
+          h1{color:#38bdf8}h2{color:#a78bfa}pre{background:#1e293b;padding:1rem;border-radius:8px;overflow-x:auto;font-size:14px}
+          .card{background:#1e293b;border-radius:12px;padding:1.5rem;margin:1rem 0;border:1px solid #334155}
+          .ok{color:#4ade80}.fail{color:#f87171}</style></head>
+          <body>
+          <h1>k6 Performance Test Results</h1>
+          <p>Run: $(date -u +'%Y-%m-%d %H:%M:%S UTC')</p>
+          HTMLEOF
+          for f in reports/*-summary.json; do
+            [ -f "$f" ] || continue
+            name=$(basename "$f" -summary.json)
+            echo "<div class='card'><h2>$name</h2><pre>$(cat "$f")</pre></div>" >> reports/index.html
+          done
+          echo "</body></html>" >> reports/index.html
+      - name: Upload Pages artifact
+        if: always()
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: reports
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

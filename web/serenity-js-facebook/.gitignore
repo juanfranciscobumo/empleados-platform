@@ -1,0 +1,9 @@
+node_modules/
+target/
+playwright-report/
+test-results/
+auth.json
+*.js.map
+*.d.ts
+!cucumber.js
+!.eslintrc.js

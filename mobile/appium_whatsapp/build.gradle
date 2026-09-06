@@ -1,0 +1,57 @@
+defaultTasks 'clean', 'test', 'aggregate'
+
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java-library'
+
+repositories {
+    mavenCentral()
+}
+
+buildscript {
+    repositories {
+        mavenCentral()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath("net.serenity-bdd:serenity-gradle-plugin:3.2.5")
+        classpath("net.serenity-bdd:serenity-single-page-report:3.3.1")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'net.serenity-bdd.aggregator'
+apply from: "$rootDir/gradle/libraries.gradle"
+serenity {
+    reports = ["single-page-html"]
+}
+dependencies {
+
+    implementation libs.test.serenity.cucumber,
+            libs.test.serenity.junit,
+            libs.test.cucumber.junit,
+            libs.test.cucumber.java,
+            libs.test.cucumber.core,
+            libs.test.serenity.core,
+            libs.test.serenity.screenplay,
+            libs.test.serenity.screenplayWebdriver,
+            libs.test.junitApi,
+            libs.test.junitEngine,
+            libs.test.assertj,
+            libs.slf4jApi
+
+}
+
+test {
+    testLogging.showStandardStreams = true
+    systemProperties System.getProperties()
+    // maxParallelForks = 2
+}
+
+gradle.startParameter.continueOnFailure = true
+
+test.finalizedBy(aggregate)

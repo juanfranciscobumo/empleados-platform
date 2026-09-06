@@ -1,0 +1,50 @@
+plugins {
+    id 'java-library'
+    id 'eclipse'
+    id 'idea'
+    id "net.serenity-bdd.serenity-gradle-plugin" version "4.2.7"
+}
+
+defaultTasks 'clean', 'test', 'aggregate'
+
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+apply from: "$rootDir/gradle/libraries.gradle"
+
+sourceCompatibility = 11
+targetCompatibility = 11
+dependencies {
+
+    implementation libs.test.serenity.core,
+            libs.test.cucumber.junit,
+            libs.test.cucumber.java,
+            libs.test.cucumber.core,
+            libs.test.serenity.screenplay,
+            libs.test.serenity.junit,
+            libs.test.serenity.screenplayWebdriver,
+            libs.test.serenity.cucumber,
+            libs.test.junitPlatform,
+            libs.test.junitLauncher,
+            libs.test.junitVintage,
+            libs.test.junitJupiter,
+            libs.test.serenity.rest,
+            libs.test.assertj,
+            libs.logback,
+            libs.test.jacksonDatatype,
+            libs.test.jacksonDataformat,
+            libs.test.fillo
+
+
+}
+test {
+    useJUnitPlatform()
+
+}
+
+gradle.startParameter.continueOnFailure = true
+
+test.finalizedBy(aggregate)

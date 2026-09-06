@@ -1,0 +1,7 @@
+{
+  "posts": "/posts",
+  "users": "/users",
+  "comments": "/comments",
+  "albums": "/albums",
+  "todos": "/todos"
+}

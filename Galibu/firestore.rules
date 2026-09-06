@@ -1,0 +1,80 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Helper to check if user is authenticated
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    // Rule for jobs and their subcollections (including messages and typing)
+    match /jobs/{jobId} {
+      // Professionals can browse OPEN jobs; participants can read their own negotiation/accepted jobs.
+      allow read: if isAuthenticated() && (
+        resource.data.status == "OPEN" ||
+        resource.data.clientId == request.auth.uid ||
+        resource.data.professionalId == request.auth.uid
+      );
+
+      // Creating/updating/deleting jobs is restricted to involved participants.
+      allow write: if isAuthenticated() && (
+        (request.resource != null && (
+          request.resource.data.clientId == request.auth.uid ||
+          request.resource.data.professionalId == request.auth.uid
+        )) ||
+        (resource != null && (
+          resource.data.clientId == request.auth.uid ||
+          resource.data.professionalId == request.auth.uid
+        )) ||
+        // Allow marketplace progression from OPEN -> NEGOTIATING by authenticated professionals.
+        (resource != null && request.resource != null &&
+          resource.data.status == "OPEN" &&
+          request.resource.data.status == "NEGOTIATING" &&
+          request.resource.data.clientId == resource.data.clientId
+        )
+      );
+
+      match /bids/{bidId} {
+        // Bid owners can always read their own bids (for collectionGroup queries).
+        // Clients and assigned professionals of the job can also read bids.
+        allow read: if isAuthenticated() && (
+          resource.data.professionalId == request.auth.uid ||
+          get(/databases/$(database)/documents/jobs/$(jobId)).data.clientId == request.auth.uid ||
+          get(/databases/$(database)/documents/jobs/$(jobId)).data.professionalId == request.auth.uid
+        );
+
+        // Any authenticated professional can create bids on marketplace jobs.
+        allow create: if isAuthenticated() &&
+          request.resource.data.professionalId == request.auth.uid &&
+          get(/databases/$(database)/documents/jobs/$(jobId)).data.status in ["OPEN", "NEGOTIATING"];
+
+        // Client of the job or the professional who owns the bid can update/delete it.
+        allow update, delete: if isAuthenticated() && (
+          get(/databases/$(database)/documents/jobs/$(jobId)).data.clientId == request.auth.uid ||
+          resource.data.professionalId == request.auth.uid
+        );
+      }
+
+      match /chats/{messageId} {
+        // To read or write chats, the user must be a participant of the parent job document.
+        allow read, write: if isAuthenticated() && (
+          get(/databases/$(database)/documents/jobs/$(jobId)).data.clientId == request.auth.uid ||
+          get(/databases/$(database)/documents/jobs/$(jobId)).data.professionalId == request.auth.uid
+        );
+      }
+    }
+
+    // Rule for typing collection
+    match /typing/{jobId} {
+      allow read, write: if isAuthenticated() && (
+        get(/databases/$(database)/documents/jobs/$(jobId)).data.clientId == request.auth.uid ||
+        get(/databases/$(database)/documents/jobs/$(jobId)).data.professionalId == request.auth.uid
+      );
+    }
+
+    // Default rules for other collections like users
+    match /users/{userId} {
+      allow read: if isAuthenticated();
+      allow write: if isAuthenticated() && request.auth.uid == userId;
+    }
+  }
+}
