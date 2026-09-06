@@ -1,0 +1,12 @@
+{
+  "name": "k6-empleados",
+  "version": "1.0.0",
+  "description": "k6 performance tests for Empleados API",
+  "scripts": {
+    "test:crud": "k6 run employees-crud.js",
+    "test:all": "k6 run employees-crud.js"
+  },
+  "keywords": ["k6", "performance", "api", "testing"],
+  "author": "Juan Francisco Builes Montoya",
+  "license": "MIT"
+}

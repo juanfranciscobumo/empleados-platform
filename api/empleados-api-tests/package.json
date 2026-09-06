@@ -1,0 +1,26 @@
+{
+  "name": "empleados-api-tests",
+  "version": "1.0.0",
+  "description": "API tests for Empleados API using Serenity-JS",
+  "scripts": {
+    "test": "serenity-bdd run --config serenity.config.ts",
+    "test:api": "serenity-bdd run --tags '@api'",
+    "report": "serenity-bdd report"
+  },
+  "dependencies": {
+    "@serenity-js/assertions": "^3.2.0",
+    "@serenity-js/core": "^3.2.0",
+    "@serenity-js/cucumber": "^3.2.0",
+    "@serenity-js/rest": "^3.2.0",
+    "@serenity-js/serenity-bdd": "^3.2.0",
+    "@serenity-js/web": "^3.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "typescript": "^5.3.0",
+    "ts-node": "^10.9.0"
+  },
+  "keywords": ["serenity-js", "api", "testing", "cucumber", "screenplay"],
+  "author": "Juan Francisco Builes Montoya",
+  "license": "MIT"
+}
